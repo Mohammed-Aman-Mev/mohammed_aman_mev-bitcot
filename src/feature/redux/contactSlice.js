@@ -1,43 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  allContacts: [
-    {
-      name: "John Doe",
-      email: "john@example.com",
-      id: 1,
-      address: "123 Main Street, Cityville",
-      number: "5",
-    },
-    {
-      name: "Jane Smith",
-      email: "jane@example.com",
-      id: 2,
-      address: "456 Oak Avenue, Townsville",
-      number: "58",
-    },
-    {
-      name: "Bob Johnson",
-      email: "bob@example.com",
-      id: 3,
-      address: "789 Elm Road, Villagetown",
-      number: "12",
-    },
-    {
-      name: "Alice Brown",
-      email: "alice@example.com",
-      id: 4,
-      address: "101 Pine Lane, Hamletville",
-      number: "756",
-    },
-    {
-      name: "Chris Davis",
-      email: "chris@example.com",
-      id: 5,
-      address: "202 Cedar Street, Suburbia",
-      number: "890",
-    },
-  ],
+  allContacts: [],
   editContactState: { data: "", isEdit: false },
   show: "",
   searchData: [],
