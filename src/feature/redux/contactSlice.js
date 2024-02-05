@@ -7,39 +7,40 @@ const initialState = {
       email: "john@example.com",
       id: 1,
       address: "123 Main Street, Cityville",
-      number: "5551234",
+      number: "5",
     },
     {
       name: "Jane Smith",
       email: "jane@example.com",
       id: 2,
       address: "456 Oak Avenue, Townsville",
-      number: "5555678",
+      number: "58",
     },
     {
       name: "Bob Johnson",
       email: "bob@example.com",
       id: 3,
       address: "789 Elm Road, Villagetown",
-      number: "5559012",
+      number: "12",
     },
     {
       name: "Alice Brown",
       email: "alice@example.com",
       id: 4,
       address: "101 Pine Lane, Hamletville",
-      number: "5553456",
+      number: "756",
     },
     {
       name: "Chris Davis",
       email: "chris@example.com",
       id: 5,
       address: "202 Cedar Street, Suburbia",
-      number: "5557890",
+      number: "890",
     },
   ],
   editContactState: { data: "", isEdit: false },
   show: "",
+  searchData: [],
 };
 
 export const allContactSlice = createSlice({
@@ -51,6 +52,11 @@ export const allContactSlice = createSlice({
     },
     deleteContact: (state, action) => {
       state.allContacts = state.allContacts.filter((i) => {
+        if (i.id !== action.payload) {
+          return i;
+        }
+      });
+      state.searchData = state.searchData.filter((i) => {
         if (i.id !== action.payload) {
           return i;
         }
@@ -71,11 +77,39 @@ export const allContactSlice = createSlice({
           return i;
         }
       });
+      state.searchData = state.searchData.map((i) => {
+        if (i.id === action.payload.id) {
+          return action.payload;
+        } else {
+          return i;
+        }
+      });
       state.editContactState = { data: "", isEdit: false };
     },
 
     showData: (state, action) => {
       state.show = action.payload;
+    },
+    removeShowData: (state, action) => {
+      state.show = "";
+    },
+    searchContact: (state, action) => {
+      if (action.payload) {
+        state.searchData = state.allContacts.filter((data) => {
+          const [a, b] = data.name.split(" ");
+          if (
+            a.toLowerCase().includes(action.payload) ||
+            b.toLowerCase().includes(action.payload) ||
+            data.number.includes(action.payload)
+          ) {
+            return data;
+          } else {
+            return;
+          }
+        });
+      } else {
+        state.searchData = [];
+      }
     },
   },
 });
@@ -86,5 +120,7 @@ export const {
   editContact,
   updateContact,
   showData,
+  removeShowData,
+  searchContact,
 } = allContactSlice.actions;
 export default allContactSlice.reducer;

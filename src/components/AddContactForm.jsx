@@ -73,7 +73,7 @@ const AddContactForm = ({ toggleForm, setToggle }) => {
     <div
       className={
         toggleForm
-          ? "w-full h-[100vh] absolute flex items-center justify-center top-0 bg-neutral-800 bg-transparent bg-opacity-50"
+          ? "w-full h-[100vh] absolute flex items-center justify-center top-0 bg-neutral-800 bg-opacity-50"
           : "hidden"
       }
     >
