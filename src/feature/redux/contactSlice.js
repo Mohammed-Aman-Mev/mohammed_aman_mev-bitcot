@@ -21,6 +21,7 @@ const initialState = {
       address: "jail road indore",
     },
   ],
+  editContact: { data: "", isEdit: false },
 };
 
 export const allContactSlice = createSlice({
