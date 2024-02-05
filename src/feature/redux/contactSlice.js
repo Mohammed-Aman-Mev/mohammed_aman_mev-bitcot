@@ -57,7 +57,11 @@ export const allContactSlice = createSlice({
       });
     },
     editContact: (state, action) => {
-      state.editContactState = { data: action.payload, isEdit: true };
+      if (action.payload) {
+        state.editContactState = { data: action.payload, isEdit: true };
+      } else {
+        state.editContactState = { data: "", isEdit: false };
+      }
     },
     updateContact: (state, action) => {
       state.allContacts = state.allContacts.map((i) => {
@@ -69,9 +73,18 @@ export const allContactSlice = createSlice({
       });
       state.editContactState = { data: "", isEdit: false };
     },
+
+    showData: (state, action) => {
+      state.show = action.payload;
+    },
   },
 });
 
-export const { createContact, deleteContact, editContact, updateContact } =
-  allContactSlice.actions;
+export const {
+  createContact,
+  deleteContact,
+  editContact,
+  updateContact,
+  showData,
+} = allContactSlice.actions;
 export default allContactSlice.reducer;

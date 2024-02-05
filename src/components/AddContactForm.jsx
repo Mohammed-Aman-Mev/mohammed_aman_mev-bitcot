@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { IoClose } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
-import { createContact, updateContact } from "../feature/redux/contactSlice";
+import {
+  createContact,
+  editContact,
+  updateContact,
+} from "../feature/redux/contactSlice";
 
 const AddContactForm = ({ toggleForm, setToggle }) => {
   const editContactState = useSelector(
     (state) => state.contact.editContactState
   );
   const dispatch = useDispatch();
-  const editContact = useSelector((state) => state.contact.editContact);
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -16,15 +20,22 @@ const AddContactForm = ({ toggleForm, setToggle }) => {
     address: "",
   });
 
+  const handleClose = () => {
+    dispatch(editContact());
+    setToggle();
+  };
+
   const resetForm = () => {
     setFormData({
+      id: editContactState.isEdit
+        ? editContactState.data.id
+        : crypto.randomUUID(),
       name: "",
       email: "",
       number: "",
       address: "",
     });
   };
-  // console.log(editContactState, formData.number);
 
   const handleState = (e) => {
     setFormData({
@@ -69,7 +80,7 @@ const AddContactForm = ({ toggleForm, setToggle }) => {
       <div className="bg-white rounded-md sm:w-[350px]">
         <div className="flex justify-between w-full border-b-2">
           {editContactState.isEdit ? "Edit Contact" : "Add Contact"}
-          <IoClose onClick={setToggle} />
+          <IoClose onClick={handleClose} />
         </div>
         <form className="flex flex-col" onSubmit={(e) => handleSubmit(e)}>
           <input
