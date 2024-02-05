@@ -10,7 +10,7 @@ const AllContacts = ({ toggleForm, setToggle }) => {
         <GoPlusCircle onClick={setToggle} />
       </header>
       <input type="text" id="search" />
-      <AllContactList />
+      <AllContactList setToggle={setToggle} />
     </div>
   );
 };

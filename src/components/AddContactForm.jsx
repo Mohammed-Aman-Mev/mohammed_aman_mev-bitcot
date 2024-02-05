@@ -1,9 +1,63 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { IoClose } from "react-icons/io5";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { createContact, updateContact } from "../feature/redux/contactSlice";
 
 const AddContactForm = ({ toggleForm, setToggle }) => {
+  const editContactState = useSelector(
+    (state) => state.contact.editContactState
+  );
+  const dispatch = useDispatch();
   const editContact = useSelector((state) => state.contact.editContact);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    number: "",
+    address: "",
+  });
+
+  const resetForm = () => {
+    setFormData({
+      name: "",
+      email: "",
+      number: "",
+      address: "",
+    });
+  };
+  // console.log(editContactState, formData.number);
+
+  const handleState = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (editContactState.isEdit) dispatch(updateContact(formData));
+    else dispatch(createContact({ ...formData, id: crypto.randomUUID() }));
+    setFormData({
+      name: "",
+      email: "",
+      number: "",
+      address: "",
+    });
+    setToggle();
+  };
+
+  useEffect(() => {
+    if (editContactState.isEdit) {
+      setFormData({
+        id: editContactState.data.id,
+        name: editContactState.data.name,
+        email: editContactState.data.email,
+        number: editContactState.data.number,
+        address: editContactState.data.address,
+      });
+    }
+  }, [editContactState]);
+
   return (
     <div
       className={
@@ -14,18 +68,48 @@ const AddContactForm = ({ toggleForm, setToggle }) => {
     >
       <div className="bg-white rounded-md sm:w-[350px]">
         <div className="flex justify-between w-full border-b-2">
-          {editContact.isEdit ? "Edit Contact" : "Add Contact"}
+          {editContactState.isEdit ? "Edit Contact" : "Add Contact"}
           <IoClose onClick={setToggle} />
         </div>
-        <form className="flex flex-col">
-          <input type="text" placeholder="Enter Your Name" />
-          <input type="email" placeholder="Enter Your Email" />
-          <input type="tel" placeholder="Enter Your Number" />
-          <input type="text" placeholder="Enter Your Address" />
+        <form className="flex flex-col" onSubmit={(e) => handleSubmit(e)}>
+          <input
+            type="text"
+            placeholder="Enter Your Name"
+            required
+            name="name"
+            value={formData.name}
+            onChange={(e) => handleState(e)}
+          />
+          <input
+            type="email"
+            placeholder="Enter Your Email"
+            required
+            name="email"
+            value={formData.email}
+            onChange={(e) => handleState(e)}
+          />
+          <input
+            type="number"
+            placeholder="Enter Your Number"
+            required
+            name="number"
+            value={formData.number}
+            onChange={(e) => handleState(e)}
+          />
+          <input
+            type="text"
+            placeholder="Enter Your Address"
+            required
+            name="address"
+            value={formData.address}
+            onChange={(e) => handleState(e)}
+          />
           <button type="submit">
-            {editContact.isEdit ? "Update" : "Submit"}
+            {editContactState.isEdit ? "Update" : "Submit"}
           </button>
-          <button type="reset">Reset</button>
+          <button type="reset" onClick={resetForm}>
+            Reset
+          </button>
         </form>
       </div>
     </div>

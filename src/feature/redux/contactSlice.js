@@ -3,35 +3,72 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   allContacts: [
     {
-      name: "Aman Mev",
-      number: "9977656337",
-      email: "aman@gmail.com",
-      address: "jail road indore",
+      name: "John Doe",
+      email: "john@example.com",
+      id: 1,
+      address: "123 Main Street, Cityville",
+      number: "5551234",
     },
     {
-      name: "Aman2 Mev",
-      number: "9977656337",
-      email: "aman@gmail.com",
-      address: "jail road indore",
+      name: "Jane Smith",
+      email: "jane@example.com",
+      id: 2,
+      address: "456 Oak Avenue, Townsville",
+      number: "5555678",
     },
     {
-      name: "Aman3 Mev",
-      number: "9977656337",
-      email: "aman@gmail.com",
-      address: "jail road indore",
+      name: "Bob Johnson",
+      email: "bob@example.com",
+      id: 3,
+      address: "789 Elm Road, Villagetown",
+      number: "5559012",
+    },
+    {
+      name: "Alice Brown",
+      email: "alice@example.com",
+      id: 4,
+      address: "101 Pine Lane, Hamletville",
+      number: "5553456",
+    },
+    {
+      name: "Chris Davis",
+      email: "chris@example.com",
+      id: 5,
+      address: "202 Cedar Street, Suburbia",
+      number: "5557890",
     },
   ],
-  editContact: { data: "", isEdit: false },
+  editContactState: { data: "", isEdit: false },
+  show: "",
 };
 
 export const allContactSlice = createSlice({
   name: "Contacts",
   initialState,
   reducers: {
-    createContact: (state, action) => {},
-    deleteContact: (state, action) => {},
-    editContact: (state, action) => {},
-    updateContact: (state, action) => {},
+    createContact: (state, action) => {
+      state.allContacts = [...state.allContacts, action.payload];
+    },
+    deleteContact: (state, action) => {
+      state.allContacts = state.allContacts.filter((i) => {
+        if (i.id !== action.payload) {
+          return i;
+        }
+      });
+    },
+    editContact: (state, action) => {
+      state.editContactState = { data: action.payload, isEdit: true };
+    },
+    updateContact: (state, action) => {
+      state.allContacts = state.allContacts.map((i) => {
+        if (i.id === action.payload.id) {
+          return action.payload;
+        } else {
+          return i;
+        }
+      });
+      state.editContactState = { data: "", isEdit: false };
+    },
   },
 });
 
