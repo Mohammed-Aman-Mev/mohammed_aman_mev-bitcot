@@ -1,7 +1,12 @@
 import React from "react";
+import AllContacts from "./components/AllContacts";
 
 const App = () => {
-  return <></>;
+  return (
+    <div>
+      <AllContacts />
+    </div>
+  );
 };
 
 export default App;
