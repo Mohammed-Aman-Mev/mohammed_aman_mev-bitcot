@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import AllContacts from "./components/AllContacts";
+import AddContactForm from "./components/AddContactForm";
 
 const App = () => {
+  const [toggleForm, setToggleForm] = useState(false);
+
+  const setToggle = () => {
+    setToggleForm((bool) => !bool);
+  };
+
   return (
-    <div>
-      <AllContacts />
-    </div>
+    <>
+      <AllContacts toggleForm={toggleForm} setToggle={setToggle} />
+      <AddContactForm toggleForm={toggleForm} setToggle={setToggle} />
+    </>
   );
 };
 
