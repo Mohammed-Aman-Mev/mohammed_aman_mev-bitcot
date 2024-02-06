@@ -77,50 +77,83 @@ const AddContactForm = ({ toggleForm, setToggle }) => {
           : "hidden"
       }
     >
-      <div className="bg-white rounded-md sm:w-[350px]">
-        <div className="flex justify-between w-full border-b-2">
-          {editContactState.isEdit ? "Edit Contact" : "Add Contact"}
-          <IoClose onClick={handleClose} />
+      <div className="bg-white flex flex-col rounded-md sm:w-[350px]">
+        <div className="flex justify-between w-full border-b-2 px-4 py-2">
+          <h2 className="text-gray-400 text-xl ">
+            {editContactState.isEdit ? "Edit Contact" : "Add Contact"}
+          </h2>
+          <IoClose className="text-2xl text-gray-400" onClick={handleClose} />
         </div>
-        <form className="flex flex-col" onSubmit={(e) => handleSubmit(e)}>
-          <input
-            type="text"
-            placeholder="Enter Your Name"
-            required
-            name="name"
-            value={formData.name}
-            onChange={(e) => handleState(e)}
-          />
-          <input
-            type="email"
-            placeholder="Enter Your Email"
-            required
-            name="email"
-            value={formData.email}
-            onChange={(e) => handleState(e)}
-          />
-          <input
-            type="number"
-            placeholder="Enter Your Number"
-            required
-            name="mobile"
-            value={formData.mobile}
-            onChange={(e) => handleState(e)}
-          />
-          <input
-            type="text"
-            placeholder="Enter Your Address"
-            required
-            name="address"
-            value={formData.address}
-            onChange={(e) => handleState(e)}
-          />
-          <button type="submit">
-            {editContactState.isEdit ? "Update" : "Submit"}
-          </button>
-          <button type="reset" onClick={resetForm}>
-            Reset
-          </button>
+        <form
+          className="flex flex-col items-center py-5"
+          onSubmit={(e) => handleSubmit(e)}
+        >
+          <div className="flex flex-col">
+            <label>Name:</label>
+            <input
+              className="border-[2px] lg:w-[90%] border-black rounded-sm px-2 py-1"
+              type="text"
+              placeholder="Enter Your Name"
+              required
+              name="name"
+              value={formData.name}
+              onChange={(e) => handleState(e)}
+            />
+          </div>
+          <div className="flex flex-col">
+            <label>Email:</label>
+
+            <input
+              className="border-[2px] lg:w-[90%] border-black rounded-sm px-2 py-1"
+              type="email"
+              placeholder="Enter Your Email"
+              required
+              name="email"
+              value={formData.email}
+              onChange={(e) => handleState(e)}
+            />
+          </div>
+          <div className="flex flex-col">
+            <label>PhoneNumber:</label>
+
+            <input
+              className="border-[2px] lg:w-[90%] border-black rounded-sm px-2 py-1"
+              type="number"
+              placeholder="Enter Your Number"
+              required
+              name="mobile"
+              value={formData.mobile}
+              onChange={(e) => handleState(e)}
+            />
+          </div>
+          <div className="flex flex-col">
+            <label>Address:</label>
+
+            <input
+              className="border-[2px] lg:w-[90%] border-black rounded-sm px-2 py-1"
+              type="text"
+              placeholder="Enter Your Address"
+              required
+              name="address"
+              value={formData.address}
+              onChange={(e) => handleState(e)}
+            />
+          </div>
+          <div className="flex gap-7 mt-3">
+            <button
+              type="submit"
+              className="bg-[#006ef7] text-white rounded-md px-2 py-0.5"
+            >
+              {editContactState.isEdit ? "Update" : "Submit"}
+            </button>
+            <button
+              className="bg-black text-white rounded-md px-2 py-0.5"
+              type="reset"
+              onClick={resetForm}
+            >
+              Reset
+            </button>
+          </div>
         </form>
       </div>
     </div>
