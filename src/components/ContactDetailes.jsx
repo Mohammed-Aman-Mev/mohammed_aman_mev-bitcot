@@ -18,13 +18,28 @@ const ContactDetailes = ({}) => {
           : "hidden"
       }
     >
-      <div className="bg-white rounded-md sm:w-[350px]">
-        <div className="flex justify-between w-full border-b-2">
-          <IoClose onClick={setDetail} />
-          {data.name} <br />
-          {data.email} <br />
-          {data.mobile} <br />
-          {data.address}
+      <div className="flex flex-col items-center rounded-md p-4 sm:w-[400px]">
+        <div className="bg-white w-full">
+          <div className="flex items-center px-4 py-2 justify-between w-full border-b-2">
+            <h3 className="text-gray-400 text-xl">Contact Details</h3>
+            <IoClose className="text-xl text-gray-400" onClick={setDetail} />
+          </div>
+        </div>
+        <div className="bg-[#eff8ff] w-full p-3">
+          <div className="bg-white w-full rounded-md flex items-center justify-center">
+            <div className="flex flex-col items-end">
+              <h3 className="font-semibold">Name: </h3>
+              <h3 className="font-semibold">Email: </h3>
+              <h3 className="font-semibold">Number: </h3>
+              <h3 className="font-semibold">Address: </h3>
+            </div>
+            <div className="flex flex-col items-start">
+              <h3 className="font-semibold"> -{data.name}</h3>
+              <h3 className="font-semibold"> -{data.email}</h3>
+              <h3 className="font-semibold"> -{data.mobile}</h3>
+              <h3 className="font-semibold"> -{data.address}</h3>
+            </div>
+          </div>
         </div>
       </div>
     </div>
