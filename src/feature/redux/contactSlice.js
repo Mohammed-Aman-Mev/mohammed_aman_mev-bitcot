@@ -1,10 +1,14 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { getData } from "../service/getContact";
 
 const initialState = {
   allContacts: [],
   editContactState: { data: "", isEdit: false },
   show: "",
   searchData: [],
+  isLoading: false,
+  isError: false,
+  errorMessage: "",
 };
 
 export const allContactSlice = createSlice({
@@ -57,15 +61,19 @@ export const allContactSlice = createSlice({
     removeShowData: (state, action) => {
       state.show = "";
     },
+
     searchContact: (state, action) => {
       if (action.payload) {
+        console.log(action.payload);
         state.searchData = state.allContacts.filter((data) => {
-          const [a, b] = data.name.split(" ");
-          if (
-            a.toLowerCase().includes(action.payload) ||
-            b.toLowerCase().includes(action.payload) ||
-            data.number.includes(action.payload)
-          ) {
+          let [a, b] = data.name.split(" ");
+          b = b ? b.toLowerCase() : null;
+          a = a.toLowerCase();
+          if (a.includes(action.payload.toLowerCase())) {
+            return data;
+          } else if (b ? b.includes(action.payload.toLowerCase()) : null) {
+            return data;
+          } else if (data.mobile.includes(action.payload)) {
             return data;
           } else {
             return;
@@ -75,6 +83,24 @@ export const allContactSlice = createSlice({
         state.searchData = [];
       }
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(get_Contact_Data.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(get_Contact_Data.fulfilled, (state, action) => {
+        state.isLoading = false;
+
+        state.allContacts = action.payload;
+      })
+      .addCase(get_Contact_Data.rejected, (state, action) => {
+        state.isLoading = false;
+
+        state.allContacts = [];
+        state.isError = true;
+        state.errorMessage = action.payload;
+      });
   },
 });
 
@@ -88,3 +114,16 @@ export const {
   searchContact,
 } = allContactSlice.actions;
 export default allContactSlice.reducer;
+
+export const get_Contact_Data = createAsyncThunk(
+  "GET_CONTACT_DATA",
+  async () => {
+    try {
+      return await getData();
+    } catch (error) {
+      const message = error.response.data.message;
+      alert(error.message);
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);

@@ -23,7 +23,7 @@ const ContactDetailes = ({}) => {
           <IoClose onClick={setDetail} />
           {data.name} <br />
           {data.email} <br />
-          {data.number} <br />
+          {data.mobile} <br />
           {data.address}
         </div>
       </div>

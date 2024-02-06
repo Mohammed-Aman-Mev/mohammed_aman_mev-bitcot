@@ -9,10 +9,11 @@ const AllContactList = ({ setToggle }) => {
   return (
     <ul className="w-full">
       {searchData.length === 0
-        ? allData.map((data) => (
+        ? allData.map((data,i) => (
             <AllContactListItem
               key={data.id}
               data={data}
+              i={i}
               setToggle={setToggle}
             />
           ))

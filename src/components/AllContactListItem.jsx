@@ -10,7 +10,7 @@ import {
   showData,
 } from "../feature/redux/contactSlice";
 
-const AllContactListItem = ({ data, setToggle }) => {
+const AllContactListItem = ({ data, setToggle, i }) => {
   const dispatch = useDispatch();
 
   const handleEdit = () => {
@@ -19,13 +19,28 @@ const AllContactListItem = ({ data, setToggle }) => {
   };
 
   return (
-    <li className="bg-white flex w-full justify-between mt-2">
-      <CgProfile />
-      {data.name} <br />
-      {data.number}
-      <IoEyeSharp onClick={() => dispatch(showData(data))} />
-      <AiFillDelete onClick={() => dispatch(deleteContact(data.id))} />
-      <MdModeEditOutline onClick={handleEdit} />
+    <li className="bg-white px-6 py-3 flex w-full rounded-md justify-between mt-2 items-center">
+      {i + 1}
+      <div className="flex items-center justify-between w-[90%]">
+        <div className="flex items-center justify-between gap-3">
+          <CgProfile className="text-5xl" />
+          <h3>
+            {data.name} <br />
+            {data.mobile}
+          </h3>
+        </div>
+        <div className="flex items-center justify-between gap-5">
+          <IoEyeSharp
+            className="text-2xl"
+            onClick={() => dispatch(showData(data))}
+          />
+          <AiFillDelete
+            className="text-2xl"
+            onClick={() => dispatch(deleteContact(data.id))}
+          />
+          <MdModeEditOutline className="text-2xl" onClick={handleEdit} />
+        </div>
+      </div>
     </li>
   );
 };

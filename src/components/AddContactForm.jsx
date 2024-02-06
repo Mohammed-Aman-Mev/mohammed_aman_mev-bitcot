@@ -16,7 +16,7 @@ const AddContactForm = ({ toggleForm, setToggle }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    number: "",
+    mobile: "",
     address: "",
   });
 
@@ -32,7 +32,7 @@ const AddContactForm = ({ toggleForm, setToggle }) => {
         : crypto.randomUUID(),
       name: "",
       email: "",
-      number: "",
+      mobile: "",
       address: "",
     });
   };
@@ -51,7 +51,7 @@ const AddContactForm = ({ toggleForm, setToggle }) => {
     setFormData({
       name: "",
       email: "",
-      number: "",
+      mobile: "",
       address: "",
     });
     setToggle();
@@ -63,7 +63,7 @@ const AddContactForm = ({ toggleForm, setToggle }) => {
         id: editContactState.data.id,
         name: editContactState.data.name,
         email: editContactState.data.email,
-        number: editContactState.data.number,
+        mobile: editContactState.data.mobile,
         address: editContactState.data.address,
       });
     }
@@ -103,8 +103,8 @@ const AddContactForm = ({ toggleForm, setToggle }) => {
             type="number"
             placeholder="Enter Your Number"
             required
-            name="number"
-            value={formData.number}
+            name="mobile"
+            value={formData.mobile}
             onChange={(e) => handleState(e)}
           />
           <input
