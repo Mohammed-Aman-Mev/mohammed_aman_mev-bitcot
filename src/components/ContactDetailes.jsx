@@ -18,7 +18,7 @@ const ContactDetailes = ({}) => {
           : "hidden"
       }
     >
-      <div className="flex flex-col items-center rounded-md p-4 sm:w-[400px]">
+      <div className="flex flex-col items-center rounded-md p-4 w-[80%] sm:w-[400px]">
         <div className="bg-white w-full">
           <div className="flex items-center px-4 py-2 justify-between w-full border-b-2">
             <h3 className="text-gray-400 text-xl">Contact Details</h3>

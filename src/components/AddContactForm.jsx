@@ -77,7 +77,7 @@ const AddContactForm = ({ toggleForm, setToggle }) => {
           : "hidden"
       }
     >
-      <div className="bg-white flex flex-col rounded-md w-[80%] sm:w-[350px]">
+      <div className="bg-white flex flex-col rounded-md w-[80%] top-6 md:left-[500px] sm:w-[350px]">
         <div className="flex justify-between w-full border-b-2 px-4 py-2">
           <h2 className="text-gray-400 text-xl ">
             {editContactState.isEdit ? "Edit Contact" : "Add Contact"}
