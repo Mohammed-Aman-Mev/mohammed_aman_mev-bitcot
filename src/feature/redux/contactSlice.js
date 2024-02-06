@@ -64,7 +64,6 @@ export const allContactSlice = createSlice({
 
     searchContact: (state, action) => {
       if (action.payload) {
-        console.log(action.payload);
         state.searchData = state.allContacts.filter((data) => {
           let [a, b] = data.name.split(" ");
           b = b ? b.toLowerCase() : null;
