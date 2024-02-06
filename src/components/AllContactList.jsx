@@ -9,7 +9,7 @@ const AllContactList = ({ setToggle }) => {
   return (
     <ul className="w-full">
       {searchData.length === 0
-        ? allData.map((data,i) => (
+        ? allData.map((data, i) => (
             <AllContactListItem
               key={data.id}
               data={data}
@@ -17,9 +17,10 @@ const AllContactList = ({ setToggle }) => {
               setToggle={setToggle}
             />
           ))
-        : searchData.map((data) => (
+        : searchData.map((data, i) => (
             <AllContactListItem
               key={data.id}
+              i={i}
               data={data}
               setToggle={setToggle}
             />
